@@ -1,3 +1,5 @@
 # XMU 计算机科学与技术个人速通打法
 
 以最小信息量的方式包含考试所需知识，平均每科复习时长 < 两天
+
+[网页端访问](https://xmu-cs-examclear-guide.pages.dev/)
