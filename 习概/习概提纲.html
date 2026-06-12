@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>政治理论核心考点精编</title>
+<style>
+/* ============================================================
+   CSS Custom Properties — Scholarly Minimalist
+   ============================================================ */
+:root {
+  --bg: #faf8f5;
+  --bg-card: #ffffff;
+  --bg-sidebar: #f3f0eb;
+  --text: #2c2416;
+  --text-secondary: #6b5e4a;
+  --text-muted: #9b8d7a;
+  --accent: #a0152b;
+  --accent-glow: rgba(160, 21, 43, 0.10);
+  --gold: #8b6914;
+  --gold-light: rgba(139, 105, 20, 0.08);
+  --border: #e5dfd5;
+  --shadow-sm: 0 1px 3px rgba(44, 36, 22, 0.06);
+  --shadow-md: 0 4px 24px rgba(44, 36, 22, 0.08);
+  --shadow-lg: 0 12px 48px rgba(44, 36, 22, 0.12);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --font-heading: Georgia, 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-w: 300px;
+  --topbar-h: 56px;
+  --nav-h: 64px;
+}
+
+[data-theme="dark"] {
+  --bg: #1a1814;
+  --bg-card: #24211b;
+  --bg-sidebar: #1e1c17;
+  --text: #e8e0d0;
+  --text-secondary: #b0a590;
+  --text-muted: #7a705e;
+  --accent: #c4384b;
+  --accent-glow: rgba(196, 56, 75, 0.13);
+  --gold: #c9a030;
+  --gold-light: rgba(201, 160, 48, 0.1);
+  --border: #363128;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   Base & Reset
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #fbe8ed 0%, #fef5ec 40%, #eaf1fb 70%, #e3edf9 100%);
+  color: var(--text);
+  line-height: 1.75;
+  min-height: 100vh;
+  display: flex;
+  transition: color var(--transition);
+  -webkit-font-smoothing: antialiased;
+  background-attachment: fixed;
+}
+[data-theme="dark"] body {
+  background: var(--bg);
+}
+
+/* ============================================================
+   Top Bar
+   ============================================================ */
+#topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--topbar-h);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 20px;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+#menu-toggle {
+  display: none;
+  background: none; border: none; color: var(--text);
+  font-size: 1.4rem; cursor: pointer; padding: 6px;
+  line-height: 1;
+}
+
+#search-wrap {
+  flex: 1; max-width: 480px; position: relative;
+}
+
+#search-wrap::before {
+  content: '🔍'; position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%); font-size: 0.85rem;
+  opacity: 0.5; pointer-events: none;
+}
+
+#search {
+  width: 100%; padding: 9px 16px 9px 40px;
+  border: 1px solid var(--border); border-radius: 24px;
+  background: var(--bg-card); color: var(--text);
+  font-size: 0.92rem; font-family: var(--font-body);
+  transition: all var(--transition);
+  outline: none;
+}
+#search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+#search::placeholder { color: var(--text-muted); }
+
+#search-clear {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--text-muted);
+  cursor: pointer; font-size: 1rem; display: none; padding: 2px 6px;
+}
+#search-clear.visible { display: block; }
+
+#search-count {
+  font-size: 0.8rem; color: var(--text-muted); white-space: nowrap;
+  min-width: 60px; text-align: center;
+}
+
+/* Top bar actions */
+#top-actions { display: flex; align-items: center; gap: 8px; }
+
+#theme-toggle, #view-toggle {
+  background: none; border: 1px solid var(--border); border-radius: 20px;
+  color: var(--text); cursor: pointer; padding: 6px 14px;
+  font-size: 0.85rem; font-family: var(--font-body);
+  transition: all var(--transition); white-space: nowrap;
+}
+#theme-toggle:hover, #view-toggle:hover {
+  background: var(--bg-sidebar); border-color: var(--accent);
+}
+#view-toggle.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+#card-indicator {
+  font-size: 0.82rem; color: var(--text-muted);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  min-width: 56px; text-align: right;
+}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+#sidebar {
+  position: fixed; top: var(--topbar-h); left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; overflow-x: hidden;
+  padding: 16px 0 24px;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+  z-index: 90;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
+
+#sidebar h3 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem; padding: 8px 24px 16px;
+  color: var(--text-secondary); font-weight: normal;
+  letter-spacing: 0.04em;
+}
+
+.toc-chapter { margin-bottom: 2px; }
+
+.toc-chapter-btn {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; text-align: left; padding: 10px 24px;
+  background: none; border: none;
+  font-family: var(--font-body); font-size: 0.88rem;
+  font-weight: 600; color: var(--text);
+  cursor: pointer; transition: all var(--transition);
+  letter-spacing: 0.02em;
+}
+.toc-chapter-btn:hover { background: var(--accent-glow); color: var(--accent); }
+.toc-chapter-btn .arrow {
+  font-size: 0.6rem; transition: transform 0.2s; opacity: 0.4;
+  flex-shrink: 0;
+}
+.toc-chapter.collapsed .toc-chapter-btn .arrow { transform: rotate(-90deg); }
+.toc-chapter.collapsed .toc-items { display: none; }
+
+.toc-items { display: flex; flex-direction: column; }
+
+.toc-item {
+  display: block; padding: 7px 24px 7px 44px;
+  font-size: 0.83rem; color: var(--text-secondary);
+  text-decoration: none; cursor: pointer;
+  transition: all var(--transition);
+  border-left: 2px solid transparent;
+  background: none; border-top: none; border-right: none; border-bottom: none;
+  width: 100%; text-align: left; font-family: var(--font-body);
+}
+.toc-item:hover { color: var(--accent); background: var(--accent-glow); }
+.toc-item.active {
+  color: var(--accent); background: var(--accent-glow);
+  border-left-color: var(--accent); font-weight: 600;
+}
+.toc-item.search-hidden { display: none; }
+.toc-item.search-match { color: var(--accent); font-weight: 500; }
+
+/* ============================================================
+   Main Content Area
+   ============================================================ */
+#main {
+  margin-left: var(--sidebar-w); margin-top: var(--topbar-h);
+  flex: 1; min-height: calc(100vh - var(--topbar-h));
+  display: flex; flex-direction: column;
+  transition: margin var(--transition);
+}
+
+#content { flex: 1; padding: 40px 48px 24px; display: flex; align-items: flex-start; justify-content: center; }
+
+/* ============================================================
+   Cards (Paginated View)
+   ============================================================ */
+.card {
+  display: none;
+  width: 100%; max-width: 800px;
+  background: var(--bg-card); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); padding: 48px 52px;
+  transition: all var(--transition);
+  animation: cardIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  opacity: 0.7;
+}
+.card.active { display: block; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll mode — show all cards stacked */
+#content.scroll-mode { display: block; padding: 32px 48px; }
+#content.scroll-mode .card {
+  display: block; margin-bottom: 32px;
+  animation: none;
+}
+
+/* Card typography */
+.card h2 {
+  font-family: var(--font-heading);
+  font-size: 1.45rem; font-weight: 700;
+  color: var(--text); line-height: 1.4;
+  margin-bottom: 8px; letter-spacing: 0.02em;
+}
+.card .section-num {
+  display: inline-block; font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 6px;
+  background: var(--accent-glow); padding: 2px 10px; border-radius: 12px;
+}
+
+.card blockquote {
+  margin: 20px 0 28px; padding: 18px 24px;
+  border-left: 3px solid var(--gold);
+  background: var(--gold-light); border-radius: 0 8px 8px 0;
+  font-size: 0.95rem; color: var(--text-secondary);
+  line-height: 1.7; font-style: italic;
+}
+
+.card h4 {
+  font-family: var(--font-heading);
+  font-size: 1.08rem; font-weight: 700;
+  color: var(--text); margin: 28px 0 10px;
+  padding-bottom: 6px; border-bottom: 1px dotted var(--border);
+}
+
+.card p { margin: 10px 0; font-size: 0.95rem; line-height: 1.8; }
+
+.card ul, .card ol { margin: 10px 0 10px 24px; }
+.card li { margin: 5px 0; font-size: 0.93rem; line-height: 1.7; }
+.card li strong, .card p strong { color: var(--accent); font-weight: 600; }
+
+.card table {
+  width: 100%; border-collapse: collapse; margin: 24px 0 8px;
+  font-size: 0.88rem; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.card thead th {
+  background: var(--bg-sidebar); padding: 10px 16px;
+  text-align: left; font-weight: 600; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary);
+  border-bottom: 2px solid var(--border);
+}
+.card tbody td {
+  padding: 9px 16px; border-bottom: 1px solid var(--border);
+  color: var(--text-muted); font-size: 0.86rem;
+}
+.card tbody tr:last-child td { border-bottom: none; }
+.card tbody tr:hover td { background: var(--gold-light); }
+
+/* Highlight */
+mark {
+  background: var(--accent); color: #fff; padding: 1px 4px;
+  border-radius: 3px; font-weight: 500;
+}
+[data-theme="dark"] mark { background: #8b1a2b; }
+
+/* ============================================================
+   Keyboard Hints Panel
+   ============================================================ */
+#kbd-hints {
+  position: fixed; bottom: 24px; right: 24px; z-index: 80;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  box-shadow: var(--shadow-md); font-size: 0.78rem;
+  color: var(--text-muted); line-height: 1.8;
+  transition: all var(--transition); opacity: 0.55;
+  user-select: none; pointer-events: none;
+  max-width: 220px;
+}
+#kbd-hints:hover { opacity: 1; }
+#kbd-hints .title {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-secondary);
+  margin-bottom: 8px; display: block;
+}
+#kbd-hints kbd {
+  display: inline-block; padding: 1px 7px; margin: 0 2px;
+  font-size: 0.72rem; font-family: var(--font-body);
+  background: var(--bg-sidebar); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-secondary);
+  font-weight: 600; box-shadow: 0 1px 0 var(--border);
+}
+#kbd-hints .row { display: flex; justify-content: space-between; gap: 16px; }
+#kbd-hints .row .keys { white-space: nowrap; }
+#kbd-hints .row .desc { color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  #kbd-hints { display: none; }
+}
+
+/* ============================================================
+   Card Navigation
+   ============================================================ */
+#card-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; padding: 12px 24px 28px;
+}
+#card-nav button {
+  padding: 10px 28px; border-radius: 24px;
+  font-size: 0.9rem; font-family: var(--font-body);
+  cursor: pointer; transition: all var(--transition);
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+#card-nav button:hover:not(:disabled) {
+  border-color: var(--accent); color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+#card-nav button:disabled { opacity: 0.35; cursor: not-allowed; }
+#card-nav .nav-hint {
+  font-size: 0.75rem; color: var(--text-muted);
+  position: absolute; bottom: -18px; white-space: nowrap;
+}
+
+/* Progress bar */
+#progress-bar {
+  position: fixed; top: var(--topbar-h); left: var(--sidebar-w);
+  height: 3px; z-index: 99;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  width: var(--progress, 0%);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), left var(--transition);
+  border-radius: 0 2px 2px 0;
+}
+
+/* ============================================================
+   No Results / Empty State
+   ============================================================ */
+.empty-state {
+  display: none; text-align: center; padding: 80px 20px;
+  color: var(--text-muted);
+}
+.empty-state.visible { display: block; }
+.empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+.empty-state h3 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 8px; }
+.empty-state p { font-size: 0.9rem; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  #sidebar {
+    transform: translateX(-100%);
+    width: 280px; box-shadow: var(--shadow-lg);
+  }
+  #sidebar.open { transform: translateX(0); }
+  #menu-toggle { display: block; }
+  #main { margin-left: 0; }
+  #progress-bar { left: 0; }
+  #card-indicator { display: none; }
+  #content { padding: 20px 16px; }
+  #content.scroll-mode { padding: 20px 16px; }
+  .card { padding: 28px 22px; border-radius: var(--radius); }
+  .card h2 { font-size: 1.2rem; }
+  #card-nav { gap: 12px; padding: 12px 16px 24px; }
+  #card-nav button { padding: 8px 18px; font-size: 0.85rem; }
+  #search-wrap { max-width: none; }
+}
+
+@media (max-width: 600px) {
+  #topbar { padding: 0 12px; gap: 8px; }
+  #search { font-size: 0.85rem; }
+  #theme-toggle, #view-toggle { padding: 5px 10px; font-size: 0.78rem; }
+  .card { padding: 24px 18px; }
+  .card h2 { font-size: 1.1rem; }
+  .card blockquote { padding: 14px 16px; font-size: 0.88rem; }
+  .card table { font-size: 0.78rem; }
+  .card thead th, .card tbody td { padding: 6px 10px; }
+}
+
+/* Sidebar overlay on mobile */
+#sidebar-overlay {
+  display: none; position: fixed; inset: 0; z-index: 85;
+  background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(2px);
+}
+#sidebar-overlay.visible { display: block; }
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+body { scrollbar-width: thin; scrollbar-color: var(--text-muted) transparent; }
+body::-webkit-scrollbar { width: 6px; }
+body::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 6px; }
+
+/* Print */
+@media print {
+  #sidebar, #topbar, #card-nav, #progress-bar, #sidebar-overlay { display: none !important; }
+  #main { margin: 0 !important; }
+  #content { display: block !important; padding: 0 !important; }
+  .card { display: block !important; break-inside: avoid; box-shadow: none; border: 1px solid #ccc; margin-bottom: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Overlay for mobile sidebar -->
+<div id="sidebar-overlay"></div>
+
+<!-- Keyboard Hints -->
+<div id="kbd-hints">
+  <span class="title">⌨ 快捷键</span>
+  <div class="row"><span class="desc">上下翻页</span><span class="keys"><kbd>←</kbd><kbd>→</kbd> / <kbd>J</kbd><kbd>K</kbd></span></div>
+  <div class="row"><span class="desc">搜索</span><span class="keys"><kbd>/</kbd></span></div>
+  <div class="row"><span class="desc">清除搜索</span><span class="keys"><kbd>Esc</kbd></span></div>
+  <div class="row"><span class="desc">目录</span><span class="keys"><kbd>T</kbd></span></div>
+  <div class="row"><span class="desc">卡片/滚动</span><span class="keys"><kbd>V</kbd></span></div>
+</div>
+
+<!-- Progress bar -->
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- Top Bar -->
+<header id="topbar">
+  <button id="menu-toggle" aria-label="菜单" title="目录 (T)">☰</button>
+  <div id="search-wrap">
+    <input type="search" id="search" placeholder="搜索考点..." autocomplete="off">
+    <button id="search-clear" aria-label="清除搜索">✕</button>
+  </div>
+  <span id="search-count"></span>
+  <span id="card-indicator"></span>
+  <div id="top-actions">
+    <button id="view-toggle" title="切换卡片/滚动视图 (V)">📇 卡片</button>
+    <button id="theme-toggle" aria-label="切换主题" title="切换深色/浅色模式">🌙</button>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+  <h3>📋 目录</h3>
+  <div id="toc"></div>
+</nav>
+
+<!-- Main Content -->
+<div id="main">
+  <div id="content">
+    <div class="empty-state" id="no-results">
+      <div class="icon">📭</div>
+      <h3>没有匹配的考点</h3>
+      <p>试试其他关键词</p>
+    </div>
+
+    <!-- ============================================================
+         CARDS — 27 total
+         ============================================================ -->
+
+    <!-- 1.1 -->
+    <article class="card" id="s1-1" data-section="1.1" data-chapter="1"
+             data-title="怎样理解习近平新时代中国特色社会主义思想是"两个结合"的重大成果？">
+      <span class="section-num">§ 1.1</span>
+      <h2>怎样理解习近平新时代中国特色社会主义思想是"两个结合"的重大成果？</h2>
+      <blockquote>该思想是"两个结合"的光辉典范和最大成果。"两个结合"即同<strong>中国具体实际</strong>相结合、同<strong>中华优秀传统文化</strong>相结合。这一结合拓展了道路的文化根基和历史纵深，开辟了理论和实践创新的广阔空间。只有坚持"两个结合"，才能正确回答时代重大问题，保持马克思主义生机活力。</blockquote>
+
+      <h4>一、同中国具体实际相结合</h4>
+      <p>以马克思主义之"矢"射新时代中国之"的"。坚持解放思想、实事求是、与时俱进、求真务实，一切从实际出发。成果：回答中国之问、世界之问、人民之问、时代之问，是最现实、最鲜活的马克思主义。</p>
+
+      <h4>二、同中华优秀传统文化相结合</h4>
+      <p>坚定历史自信、文化自信，古为今用、推陈出新。路径为"<strong>两个贯通、一个融通</strong>"——把马克思主义思想精髓同中华优秀传统文化精华贯通，同人民群众日用而不觉的共同价值观念融通。成果：将中华民族精神和智慧注入马克思主义，使其扎根中国大地和人民心中。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定位</td><td>光辉典范、最大成果</td></tr>
+          <tr><td>第一个结合</td><td>有的放矢、实事求是、四个"之问"</td></tr>
+          <tr><td>第二个结合</td><td>两个贯通一个融通、日用而不觉、古为今用</td></tr>
+          <tr><td>意义</td><td>文化根基、历史纵深、生机活力</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 1.2 -->
+    <article class="card" id="s1-2" data-section="1.2" data-chapter="1"
+             data-title="怎样理解习近平新时代中国特色社会主义思想的历史地位？">
+      <span class="section-num">§ 1.2</span>
+      <h2>怎样理解习近平新时代中国特色社会主义思想的历史地位？</h2>
+      <blockquote>从<strong>理论属性、理论贡献、文化意义、实践功能</strong>四个维度定位。该思想是当代中国马克思主义、21世纪马克思主义，是马克思主义中国化时代化新的飞跃。</blockquote>
+
+      <h4>一、理论属性：当代中国马克思主义、21世纪马克思主义</h4>
+      <p>是马克思主义在当代中国的最新理论成果，实现了马克思主义中国化时代化新的飞跃。</p>
+
+      <h4>二、理论贡献：开辟马克思主义中国化时代化新境界</h4>
+      <p>以坚持科学社会主义原则、总结百年党史经验为前提，回答新时代坚持和发展什么样的中国特色社会主义、怎样坚持和发展等重大课题。以全新视野深化对"<strong>三大规律</strong>"的认识——共产党执政规律、社会主义建设规律、人类社会发展规律，对马克思主义作出整体性、系统性丰富发展。</p>
+
+      <h4>三、文化意义：中华文化和中国精神的时代精华</h4>
+      <p>使马克思主义魂脉与中华优秀传统文化根脉内在贯通、相互成就。是中华民族文化主体性最有力的体现，为建设中华民族现代文明、创造人类文明新形态提供精神指引。</p>
+
+      <h4>四、实践功能：实现中华民族伟大复兴的行动指南</h4>
+      <p>是新时代党和国家事业发展的根本遵循。统揽"四个伟大"，实现脱贫攻坚、全面小康，续写"<strong>两大奇迹</strong>"（经济快速发展、社会长期稳定），推动民族复兴进入不可逆转进程。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>理论属性</td><td>新的飞跃、最新理论成果</td></tr>
+          <tr><td>理论贡献</td><td>三大规律、整体性系统性丰富发展</td></tr>
+          <tr><td>文化意义</td><td>魂脉与根脉贯通、文化主体性</td></tr>
+          <tr><td>实践功能</td><td>根本遵循、四个伟大、两大奇迹</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 2.1 -->
+    <article class="card" id="s2-1" data-section="2.1" data-chapter="2"
+             data-title="如何理解中国特色社会主义是科学社会主义的"新版本"？">
+      <span class="section-num">§ 2.1</span>
+      <h2>如何理解中国特色社会主义是科学社会主义的"新版本"？</h2>
+      <blockquote>中国特色社会主义不是母版、模板、再版、翻版，而是科学社会主义基本原则同中国具体实际、历史文化传统、时代要求相结合的<strong>创新版本</strong>。社会主义没有定于一尊、一成不变的套路。</blockquote>
+
+      <h4>一、否定四个"不是"</h4>
+      <p>不是简单延续我国历史文化的母版，不是简单套用经典作家设想的模板，不是其他国家社会主义实践的再版，不是国外现代化发展的翻版。结论：社会主义没有定于一尊、一成不变的套路。</p>
+
+      <h4>二、根本属性：是社会主义，不是其他主义</h4>
+      <p>始终坚持科学社会主义基本原则，同时根据新的时代条件赋予鲜明的中国特色。</p>
+
+      <h4>三、生成逻辑：长期探索、始终坚持、接续发展</h4>
+      <p>党的领导是根本保证。根植于中国大地，反映人民意愿，适应时代要求。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定性</td><td>创新版本，非母版/模板/再版/翻版</td></tr>
+          <tr><td>根本属性</td><td>科学社会主义基本原则 + 中国特色</td></tr>
+          <tr><td>生成逻辑</td><td>党的领导、根植中国大地</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 2.2 -->
+    <article class="card" id="s2-2" data-section="2.2" data-chapter="2"
+             data-title="如何理解我国发展新的历史方位？">
+      <span class="section-num">§ 2.2</span>
+      <h2>如何理解我国发展新的历史方位？</h2>
+      <blockquote><strong>新时代</strong>是我国发展新的历史方位。可从五个"时代"、三个"意味着"、三个"反映"三个层面把握。</blockquote>
+
+      <h4>一、五个"时代"</h4>
+      <ul>
+        <li>夺取中国特色社会主义伟大胜利的时代（承前启后、继往开来）</li>
+        <li>全面建设社会主义现代化强国的时代（决胜小康 → 强国建设）</li>
+        <li>逐步实现全体人民共同富裕的时代</li>
+        <li>实现中华民族伟大复兴中国梦的时代</li>
+        <li>不断为人类作出更大贡献的时代</li>
+      </ul>
+
+      <h4>二、三个"意味着"</h4>
+      <p>对<strong>中华民族</strong>：从站起来、富起来到强起来的伟大飞跃，迎来复兴光明前景。对<strong>科学社会主义</strong>：在21世纪中国焕发强大生机，高举中国特色社会主义旗帜。对<strong>人类发展</strong>：拓展了发展中国家走向现代化的途径，贡献中国智慧和中国方案。</p>
+
+      <h4>三、三个"反映"</h4>
+      <p>反映<strong>主要矛盾</strong>新变化——人民日益增长的美好生活需要 vs 不平衡不充分的发展；反映<strong>主要任务</strong>新变化——实现第一个百年奋斗目标，开启第二个百年奋斗目标新征程；反映<strong>中国与世界关系</strong>新变化——百年未有之大变局与民族复兴全局深度互动。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>五个"时代"</td><td>继往开来、强国建设、共同富裕、民族复兴、人类贡献</td></tr>
+          <tr><td>三个"意味着"</td><td>伟大飞跃、焕发生机、中国方案</td></tr>
+          <tr><td>三个"反映"</td><td>主要矛盾变化、主要任务变化、中外关系变化</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 2.3 -->
+    <article class="card" id="s2-3" data-section="2.3" data-chapter="2"
+             data-title="如何把握统筹推进"五位一体"总体布局、协调推进"四个全面"战略布局的重要意义？">
+      <span class="section-num">§ 2.3</span>
+      <h2>如何把握统筹推进"五位一体"总体布局、协调推进"四个全面"战略布局的重要意义？</h2>
+      <blockquote>二者相互促进、统筹联动，是从全局上确立的战略规划和部署。</blockquote>
+
+      <h4>一、"五位一体"总体布局</h4>
+      <p>经济建设、政治建设、文化建设、社会建设、生态文明建设。五个方面相互联系、相互促进、不可分割，共同构筑事业全局。这是对社会主义建设规律认识不断深化的重要成果。</p>
+
+      <h4>二、"四个全面"战略布局</h4>
+      <p>全面建设社会主义现代化国家、全面深化改革、全面依法治国、全面从严治党。既有战略目标又有战略举措，各"全面"间内在逻辑紧密，是整体战略部署的有序展开。</p>
+
+      <h4>三、二者关系</h4>
+      <p>相互促进、统筹联动，从全局上确立新时代的战略规划和部署。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>五位一体</td><td>经济、政治、文化、社会、生态文明</td></tr>
+          <tr><td>四个全面</td><td>现代化国家、深化改革、依法治国、从严治党</td></tr>
+          <tr><td>关系</td><td>相互促进、统筹联动</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 3.1 -->
+    <article class="card" id="s3-1" data-section="3.1" data-chapter="3"
+             data-title="怎样理解中国式现代化的中国特色和本质要求？">
+      <span class="section-num">§ 3.1</span>
+      <h2>怎样理解中国式现代化的中国特色和本质要求？</h2>
+      <blockquote>中国特色是<strong>五个方面的鲜明特征</strong>，本质要求是<strong>九句话的内在规定</strong>。二者共同构成中国式现代化的完整内涵。</blockquote>
+
+      <h4>一、中国特色（五个"是"）</h4>
+      <ol>
+        <li><strong>人口规模巨大的现代化</strong>：艰巨性、复杂性前所未有，全体人民整体迈进，将极大改变现代化世界版图。</li>
+        <li><strong>全体人民共同富裕的现代化</strong>：区别于西方现代化的显著标志。以人民为中心而非以资本为中心，防止两极分化。</li>
+        <li><strong>物质文明和精神文明相协调的现代化</strong>：物质富足、精神富有是根本要求。物质贫困不是社会主义，精神贫乏也不是。</li>
+        <li><strong>人与自然和谐共生的现代化</strong>：坚持绿色发展，统筹经济社会发展和生态环境保护，确保可持续。</li>
+        <li><strong>走和平发展道路的现代化</strong>：文化基因崇尚和平——"强不执弱""富不侮贫"，主张"协和万邦"。</li>
+      </ol>
+
+      <h4>二、本质要求（九句话）</h4>
+      <p>坚持中国共产党领导，坚持中国特色社会主义，实现高质量发展，发展全过程人民民主，丰富人民精神世界，实现全体人民共同富裕，促进人与自然和谐共生，推动构建人类命运共同体，创造人类文明新形态。这九句话阐明内在规定性，明确领导力量、发展道路、根本方向、总体布局和战略要求，是推进中国式现代化的重要遵循。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>五个特色</td><td>人口规模、共同富裕、两个文明协调、人与自然和谐、和平发展</td></tr>
+          <tr><td>本质要求</td><td>九句话：党的领导→人类文明新形态</td></tr>
+          <tr><td>核心区分</td><td>以人民为中心 vs 以资本为中心</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 3.2 -->
+    <article class="card" id="s3-2" data-section="3.2" data-chapter="3"
+             data-title="为什么说中国式现代化创造了人类文明新形态？">
+      <span class="section-num">§ 3.2</span>
+      <h2>为什么说中国式现代化创造了人类文明新形态？</h2>
+      <blockquote>打破"<strong>现代化 = 西方化</strong>"的迷思，开辟全新道路，为广大发展中国家提供全新选择。</blockquote>
+
+      <h4>一、提供全新现代化模式</h4>
+      <p>证明现代化道路不止一条，展现不同于西方的新图景，打破"现代化 = 西方化"的迷思。</p>
+
+      <h4>二、对西方现代化的理论和实践实现重大超越</h4>
+      <p>摒弃西方以资本为中心、两极分化、物质主义膨胀、对外扩张掠夺的老路。打破只有资本主义道路才能实现现代化的神话，有效避免西方现代化的矛盾弊端。</p>
+
+      <h4>三、为广大发展中国家提供全新选择</h4>
+      <p>坚持从本国实际出发，独立自主制定路线方针政策；依靠本国力量和人民劳动，同时借鉴人类一切优秀文明成果。核心：始终把国家民族发展进步命运掌握在自己手中。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>核心突破</td><td>打破"现代化=西方化"迷思</td></tr>
+          <tr><td>超越西方</td><td>摒弃资本中心、两极分化、扩张掠夺</td></tr>
+          <tr><td>对发展中国家</td><td>独立自主、命运掌握在自己手中</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 3.3 -->
+    <article class="card" id="s3-3" data-section="3.3" data-chapter="3"
+             data-title="如何理解教育、科技、人才是全面建设社会主义现代化国家的基础性、战略性支撑？">
+      <span class="section-num">§ 3.3</span>
+      <h2>如何理解教育、科技、人才是全面建设社会主义现代化国家的基础性、战略性支撑？</h2>
+      <blockquote>教育是根本，科技是关键，人才是基础，三者须<strong>一体推进</strong>。三个"第一"、三个"战略"、三个"优先"构成完整逻辑。</blockquote>
+
+      <h4>一、核心定位</h4>
+      <ul>
+        <li><strong>三个第一</strong>：科技是第一生产力、人才是第一资源、创新是第一动力。</li>
+        <li><strong>三个战略</strong>：科教兴国战略、人才强国战略、创新驱动发展战略。</li>
+        <li><strong>三个优先</strong>：教育优先发展、科技自立自强、人才引领驱动。</li>
+      </ul>
+
+      <h4>二、内在关系与紧迫性</h4>
+      <p>三者具有内在一致性和相互支撑性，须一体推进教育强国、科技强国、人才强国建设。同党和国家要求、群众期待、国际先进水平相比仍有差距，须在激烈国际竞争中赢得主动。</p>
+
+      <h4>三、三大战略各自内涵</h4>
+      <p><strong>科教兴国战略</strong>：全面落实科学技术是第一生产力，把科技和教育作为经济社会发展重中之重。<strong>人才强国战略</strong>：牢固树立人才资源是第一资源，把人才队伍建设提升到国家战略高度。<strong>创新驱动发展战略</strong>：坚持创新是第一动力，落实到现代化建设全过程各方面。</p>
+
+      <h4>四、推进要求</h4>
+      <p>教育优先发展——夯实人力资源深度开发基础，是重要先手棋；科技自立自强——坚持独立自主开拓创新，是决定生存发展的基础能力；人才引领驱动——巩固发展优势、赢得竞争主动，是现代化的基本规律。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>三个第一</td><td>科技（生产力）、人才（资源）、创新（动力）</td></tr>
+          <tr><td>三个战略</td><td>科教兴国、人才强国、创新驱动</td></tr>
+          <tr><td>三个优先</td><td>教育优先、科技自立、人才引领</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 4.1 -->
+    <article class="card" id="s4-1" data-section="4.1" data-chapter="4"
+             data-title="如何认识中国最大的国情就是中国共产党的领导？">
+      <span class="section-num">§ 4.1</span>
+      <h2>如何认识中国最大的国情就是中国共产党的领导？</h2>
+      <blockquote>中国共产党领导是中国特色社会主义<strong>最本质的特征</strong>，是<strong>最大国情</strong>。没有中国共产党，就没有新中国，就没有中国特色社会主义。</blockquote>
+
+      <h4>一、党的领导地位在历史奋斗中形成</h4>
+      <p>历史和现实证明：扭转近代以后历史命运、取得今天伟大成就，最根本的是有党的坚强领导。</p>
+
+      <h4>二、党的领导是人民当家作主的可靠保障</h4>
+      <p>人民当家作主是党领导人民长期奋斗的成果。只有坚持党的领导，人民才能依法享有广泛、充分、真实的民主，真正成为国家、社会和自己命运的主人。</p>
+
+      <h4>三、党的领导关系中国特色社会主义的性质、方向和命运</h4>
+      <p>中国特色社会主义之所以是社会主义，根本在于坚持党的领导。党的性质宗旨、理想信念、初心使命赋予事业信仰的力量、真理的力量、团结奋斗的力量。</p>
+
+      <h4>四、党的领导是实现中华民族伟大复兴的根本保证</h4>
+      <p>只有坚持党的领导，才能凝聚起攻坚克难、团结奋斗的磅礴伟力，确保复兴号巨轮劈波斩浪、扬帆远航。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>历史逻辑</td><td>历史奋斗中形成，最根本保证</td></tr>
+          <tr><td>民主保障</td><td>人民当家作主的可靠保障</td></tr>
+          <tr><td>性质方向</td><td>最本质特征，赋予三重力量</td></tr>
+          <tr><td>复兴保证</td><td>凝聚磅礴伟力</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 4.2 -->
+    <article class="card" id="s4-2" data-section="4.2" data-chapter="4"
+             data-title="为什么必须全面从严治党？">
+      <span class="section-num">§ 4.2</span>
+      <h2>为什么必须全面从严治党？</h2>
+      <blockquote>全面从严治党是党永葆生机活力、走好新的赶考之路的<strong>必由之路</strong>。核心是加强党的领导，基础在全面，关键在严，要害在治。</blockquote>
+
+      <h4>一、伟大事业、伟大斗争、伟大梦想的必然要求</h4>
+      <p>新时代主要任务是实现第一个百年奋斗目标、开启第二个百年奋斗目标新征程。任务极其广泛、斗争尖锐复杂、梦想光荣艰巨，必须把党建设得更加坚强有力，使党始终走在时代前列、成为全国人民主心骨、成为坚强领导核心。</p>
+
+      <h4>二、锻造坚强有力的马克思主义执政党的迫切需要</h4>
+      <p>党是世界上最大的马克思主义执政党，管党治党任务繁重。最大风险是内部变质、变色、变味，丧失政治本色，失去人民支持。必须以自我革命精神解决突出问题，落实管党治党任务比以往更加紧迫。</p>
+
+      <h4>三、核心内涵</h4>
+      <p>核心：加强党的领导。基础：全面。关键：严。要害：治。目标：克服软弱涣散和腐败问题，保持先进性纯洁性，提高领导水平和执政能力。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定位</td><td>必由之路</td></tr>
+          <tr><td>必要性</td><td>三大（事业/斗争/梦想）的必然要求</td></tr>
+          <tr><td>核心内涵</td><td>核心在领导、基础在全面、关键在严、要害在治</td></tr>
+          <tr><td>最大风险</td><td>变质、变色、变味</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 4.3 -->
+    <article class="card" id="s4-3" data-section="4.3" data-chapter="4"
+             data-title="如何理解以伟大自我革命引领伟大社会革命？">
+      <span class="section-num">§ 4.3</span>
+      <h2>如何理解以伟大自我革命引领伟大社会革命？</h2>
+      <blockquote>自我革命与社会革命<strong>相互促进</strong>，这是党的宝贵经验和新时代显著特点。党的百年奋斗史就是自我革命和社会革命相互促进的历史。</blockquote>
+
+      <h4>一、历史规律</h4>
+      <p>社会革命锻造和成就党，自我革命保障和推动事业，这是不断走向胜利的宝贵经验。</p>
+
+      <h4>二、新时代的显著特点</h4>
+      <p>新时代中国特色社会主义是艰巨而伟大的社会革命，要求党以更清醒自觉、更坚定决心、更高标准进行自我革命。没有全面从严治党，就没有今天的大好局面；没有社会革命，自我革命也不会有丰硕成果。</p>
+
+      <h4>三、永远在路上</h4>
+      <p>事业一代一代接续推进，自我革命永远在路上。必须站在事业长远发展、党长期执政的高度，把全面从严治党作为<strong>长期战略、永恒课题</strong>，把自我革命进行到底。</p>
+
+      <h4>四、使命担当</h4>
+      <p>党领导14亿多人口大国，肩负以中国式现代化推进民族复兴的使命任务。必须不忘初心、牢记使命，弘扬伟大建党精神，以自我革命引领社会革命。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>历史规律</td><td>相互促进、宝贵经验</td></tr>
+          <tr><td>新时代特点</td><td>更高标准自我革命</td></tr>
+          <tr><td>时间维度</td><td>永远在路上、长期战略、永恒课题</td></tr>
+          <tr><td>使命担当</td><td>14亿人口、中国式现代化、伟大建党精神</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 5.1 -->
+    <article class="card" id="s5-1" data-section="5.1" data-chapter="5"
+             data-title="如何理解以新发展理念引领高质量发展？">
+      <span class="section-num">§ 5.1</span>
+      <h2>如何理解以新发展理念引领高质量发展？</h2>
+      <blockquote>新发展理念是引领高质量发展的<strong>指挥棒</strong>，高质量发展是体现新发展理念的发展。高质量发展是全面建设社会主义现代化国家的<strong>首要任务</strong>。</blockquote>
+
+      <h4>一、五大理念各自解决什么问题</h4>
+      <ul>
+        <li><strong>创新</strong>（第一动力）：解决发展动力问题，居于核心地位，贯穿一切工作。</li>
+        <li><strong>协调</strong>（内在要求）：解决发展不平衡问题，增强整体性。</li>
+        <li><strong>绿色</strong>（必要条件）：解决人与自然和谐共生问题，推动绿色低碳生产生活方式。</li>
+        <li><strong>开放</strong>（必由之路）：解决发展内外联动问题，实现更大范围、更宽领域、更深层次开放。</li>
+        <li><strong>共享</strong>（本质要求）：解决社会公平正义问题，全民共享、全面共享、共建共享、渐进共享。</li>
+      </ul>
+
+      <h4>二、高质量发展内涵</h4>
+      <p>能够满足人民日益增长的美好生活需要。创新成为第一动力、协调成为内生特点、绿色成为普遍形态、开放成为必由之路、共享成为根本目的。</p>
+
+      <h4>三、推进要求</h4>
+      <p>统筹质的有效提升和量的合理增长，坚持质量第一、效益优先。以效率变革、动力变革促进质量变革，增强竞争力、创新力、抗风险能力。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>创新</td><td>第一动力，解决动力问题</td></tr>
+          <tr><td>协调</td><td>内在要求，解决不平衡</td></tr>
+          <tr><td>绿色</td><td>必要条件，解决人与自然和谐</td></tr>
+          <tr><td>开放</td><td>必由之路，解决内外联动</td></tr>
+          <tr><td>共享</td><td>本质要求，解决公平正义（四共享）</td></tr>
+          <tr><td>推进要求</td><td>质量第一、效益优先、三大变革</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 5.2 -->
+    <article class="card" id="s5-2" data-section="5.2" data-chapter="5"
+             data-title="如何加快构建新发展格局？">
+      <span class="section-num">§ 5.2</span>
+      <h2>如何加快构建新发展格局？</h2>
+      <blockquote>以<strong>国内大循环为主体、国内国际双循环相互促进</strong>，是把握未来发展主动权的战略谋划，不是被迫之举和权宜之计。</blockquote>
+
+      <h4>一、基本定性</h4>
+      <p>是根据发展阶段、环境、条件变化，特别是比较优势变化作出的重大决策。是立足当前、着眼长远的战略谋划。</p>
+
+      <h4>二、澄清三个误区</h4>
+      <ul>
+        <li><strong>不是封闭的单循环</strong>：是开放的国内国际双循环，使国内外市场更好联通。</li>
+        <li><strong>不是各地自我小循环</strong>：是全国统一大市场基础上的大循环，不能各自为政。</li>
+        <li><strong>不是权宜之计</strong>：是把握未来发展主动权的先手棋。</li>
+      </ul>
+
+      <h4>三、基本要求</h4>
+      <p>具备强大的国内经济循环体系和稳固基本盘，形成对全球资源要素的引力场。以国内大循环吸引全球资源要素，利用两个市场两种资源。保证经济循环畅通无阻，生产、分配、流通、消费有机衔接。</p>
+
+      <h4>四、主要着力点（四个着力）</h4>
+      <p>推动扩大内需战略同深化供给侧结构性改革有机结合；着力发展实体经济；着力加快科技自立自强；着力推动产业链供应链优化升级。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定性</td><td>战略谋划，非权宜之计</td></tr>
+          <tr><td>三个不是</td><td>非封闭单循环、非自我小循环、非权宜之计</td></tr>
+          <tr><td>基本要求</td><td>稳固基本盘、引力场、两个市场两种资源</td></tr>
+          <tr><td>四个着力</td><td>内需+供给侧、实体经济、科技自立、产业链</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 5.3 -->
+    <article class="card" id="s5-3" data-section="5.3" data-chapter="5"
+             data-title="如何理解全面深化改革的正确方向？">
+      <span class="section-num">§ 5.3</span>
+      <h2>如何理解全面深化改革的正确方向？</h2>
+      <blockquote>三个"<strong>必须坚持</strong>"——坚持党的领导、坚持以人民为中心、坚持"三个进一步解放"。不走封闭僵化的老路，不走改旗易帜的邪路。</blockquote>
+
+      <h4>一、坚持和改善党的全面领导、坚持和完善中国特色社会主义制度</h4>
+      <p>根本标准：是否有利于坚持和改善党的领导、坚持和完善中国特色社会主义制度。该改的坚决改，不该改的坚决不改。</p>
+
+      <h4>二、坚持以人民为中心，促进社会公平正义、增进人民福祉</h4>
+      <p>出发点和落脚点：让老百姓过上好日子。改革开放是亿万人民自己的事业，根本标准：人民满意不满意、高兴不高兴。</p>
+
+      <h4>三、坚持"三个进一步解放"</h4>
+      <p>进一步<strong>解放思想</strong>——以创新思维解决前进中的问题；进一步<strong>解放和发展社会生产力</strong>——改革开放的首要任务和鲜明特征；进一步<strong>解放和增强社会活力</strong>——激发全体人民积极性，让一切创造财富的源泉充分涌流。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>政治方向</td><td>不走老路、不走邪路，该改的改不该改的不改</td></tr>
+          <tr><td>价值取向</td><td>以人民为中心、人民满意</td></tr>
+          <tr><td>三个解放</td><td>解放思想、解放生产力、解放社会活力</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 6.1 -->
+    <article class="card" id="s6-1" data-section="6.1" data-chapter="6"
+             data-title="为什么我国不能搬来一座政治制度上的"飞来峰"？">
+      <span class="section-num">§ 6.1</span>
+      <h2>为什么我国不能搬来一座政治制度上的"飞来峰"？</h2>
+      <blockquote>政治制度必须扎根本国土壤，"飞来峰"式照搬只重外因、忽视内因，行不通。只有扎根本国土壤、汲取充沛养分的制度，才最可靠、最管用。</blockquote>
+
+      <h4>一、不存在适用于一切国家的政治制度模式</h4>
+      <p>不能用单一标尺衡量世界丰富多彩的政治制度，不能割断历史想象突然搬来一座"飞来峰"。</p>
+
+      <h4>二、民主是具体的，必须与国情相适应</h4>
+      <p>社会性质不同、现实国情不同，则民主道路不同、民主形态各异。实现民主的道路并非只有一条。</p>
+
+      <h4>三、我国政治制度的根本属性</h4>
+      <p>经济基础：建立在社会主义经济基础之上，体现社会主义国家性质，是新型的社会主义民主。制度体系：由根本政治制度、基本政治制度、重要政治制度构成"四梁八柱"。生成逻辑：党团结带领人民，以马克思主义为指导，从国情和实际出发确立，具有鲜明的中国特色、民族特色、时代特色。</p>
+
+      <h4>四、"飞来峰"思维的根本错误</h4>
+      <p>只看外因条件，不明内因的决定性作用。我国政治制度之所以行得通、有生命力、有效率，就是因为从中国社会土壤中生长起来。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>核心论断</td><td>扎根本国土壤，不搬"飞来峰"</td></tr>
+          <tr><td>国情逻辑</td><td>民主是具体的，道路不止一条</td></tr>
+          <tr><td>制度属性</td><td>社会主义经济基础、四梁八柱、三个特色</td></tr>
+          <tr><td>飞来峰错误</td><td>重外因、轻内因</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 6.2 -->
+    <article class="card" id="s6-2" data-section="6.2" data-chapter="6"
+             data-title="怎样理解全过程人民民主是最广泛、最真实、最管用的民主？">
+      <span class="section-num">§ 6.2</span>
+      <h2>怎样理解全过程人民民主是最广泛、最真实、最管用的民主？</h2>
+      <blockquote>全链条、全方位、全覆盖，三个"最"体现社会主义民主的独特优势。</blockquote>
+
+      <h4>一、最广泛：全体人民持续参与、全面覆盖</h4>
+      <p>主体全——全体人民、各个民族共同平等享有；领域全——不同地域、领域、层级、群体全面覆盖；环节全——民主选举、协商、决策、管理、监督五权贯通；渠道全——参与国家事务管理，参与经济文化社会事务管理，多渠道表达意愿和诉求。</p>
+
+      <h4>二、最真实：真真切切落实到政治生活和社会生活各方面</h4>
+      <p>从国家大政方针到百姓收入、就业、医疗、教育、养老、住房，都落实到施政措施中。人民意愿经民主决策程序成为方针政策，转化为实现人民意愿的具体实践。人民获得感、幸福感、安全感不断提升，生存权、发展权、健康权充分保障。</p>
+
+      <h4>三、最管用：六个"切实防止"</h4>
+      <p>坚持党的领导，防止群龙无首、一盘散沙；保证人民依法行使权利，防止选举时漫天许诺、选举后无人过问；加强社会力量合作协调，防止党争纷沓、相互倾轧；巩固平等团结互助和谐的民族关系，防止民族隔阂、民族冲突；发展基层民主，防止人民形式上有权、实际上无权；形成治国理政强大合力，防止相互掣肘、内耗严重。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>最广泛</td><td>四全：主体全、领域全、环节全、渠道全</td></tr>
+          <tr><td>最真实</td><td>落实到施政措施、三感提升</td></tr>
+          <tr><td>最管用</td><td>六个"切实防止"</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 7.1 -->
+    <article class="card" id="s7-1" data-section="7.1" data-chapter="7"
+             data-title="如何理解意识形态工作是为国家立心、为民族立魂的工作？">
+      <span class="section-num">§ 7.1</span>
+      <h2>如何理解意识形态工作是为国家立心、为民族立魂的工作？</h2>
+      <blockquote>意识形态关乎旗帜、关乎道路、关乎国家政治安全，决定文化前进方向和发展道路。</blockquote>
+
+      <h4>一、根本定位</h4>
+      <p>为国家立心、为民族立魂。关乎旗帜、关乎道路、关乎国家政治安全。事关党的前途命运、国家长治久安、民族凝聚力。</p>
+
+      <h4>二、根本制度保障</h4>
+      <p>坚持马克思主义在意识形态领域指导地位的根本制度，是中国特色社会主义制度体系的一项根本制度，是坚持和加强党对宣传思想文化工作全面领导的本质要求。</p>
+
+      <h4>三、历史必然与建设目标</h4>
+      <p>是历史的结论，是坚持和巩固社会主义制度、保证文化建设正确方向的必然要求。建设目标：塑造主流舆论新格局，建设具有强大凝聚力和引领力的社会主义意识形态。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定位</td><td>为国家立心、为民族立魂</td></tr>
+          <tr><td>制度保障</td><td>马克思主义指导地位的根本制度</td></tr>
+          <tr><td>建设目标</td><td>强大凝聚力和引领力</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 7.2 -->
+    <article class="card" id="s7-2" data-section="7.2" data-chapter="7"
+             data-title="如何理解中华文明的突出特性？">
+      <span class="section-num">§ 7.2</span>
+      <h2>如何理解中华文明的突出特性？</h2>
+      <blockquote>连续性、创新性、统一性、包容性、和平性，五个特性各有其"<strong>根本决定</strong>"。</blockquote>
+
+      <h4>一、连续性</h4>
+      <p>世界上唯一绵延不断且以国家形态发展至今的伟大文明。根本决定：中华民族必然走自己的路。</p>
+
+      <h4>二、创新性</h4>
+      <p>强调"苟日新日日新又日新"、革故鼎新、与时俱进。根本决定：守正不守旧、尊古不复古的进取精神，不惧新挑战的无畏品格。</p>
+
+      <h4>三、统一性</h4>
+      <p>长期历史演进中形成多元一体格局。根本决定：各民族文化融为一体；国土不可分、国家不可乱、民族不可散、文明不可断的共同信念；国家统一是核心利益核心；坚强统一的国家是各族人民命运所系。</p>
+
+      <h4>四、包容性</h4>
+      <p>由多元文化汇聚成的共同文化，具有无与伦比的包容性和吸纳力。根本决定：交往交流交融的历史取向；各宗教多元并存的和谐格局；对世界文明兼收并蓄的开放胸怀。</p>
+
+      <h4>五、和平性</h4>
+      <p>历来崇尚"以和邦国""和而不同""以和为贵"。根本决定：中国始终是世界和平的建设者、全球发展的贡献者、国际秩序的维护者；追求文明交流互鉴而不搞文化霸权；不把自己的价值观念与政治体制强加于人。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>连续性</td><td>唯一绵延不断、走自己的路</td></tr>
+          <tr><td>创新性</td><td>守正不守旧、尊古不复古</td></tr>
+          <tr><td>统一性</td><td>多元一体、国土不可分</td></tr>
+          <tr><td>包容性</td><td>兼收并蓄、多元并存</td></tr>
+          <tr><td>和平性</td><td>和而不同、不搞文化霸权</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 7.3 -->
+    <article class="card" id="s7-3" data-section="7.3" data-chapter="7"
+             data-title="如何推动中华优秀传统文化创造性转化、创新性发展？">
+      <span class="section-num">§ 7.3</span>
+      <h2>如何推动中华优秀传统文化创造性转化、创新性发展？</h2>
+      <blockquote>坚持古为今用、推陈出新，有鉴别地对待、有扬弃地继承。党既是先进文化的引领者和践行者，又是传统文化的忠实传承者和弘扬者。</blockquote>
+
+      <h4>一、创造性转化（改造形式、激活生命）</h4>
+      <p>按照时代特点和要求，对仍有借鉴价值的内涵和陈旧表现形式加以改造，赋予新的时代内涵和现代表达形式，激活生命力。</p>
+
+      <h4>二、创新性发展（补充拓展、增强影响）</h4>
+      <p>按照时代新进步新进展，对传统文化内涵加以补充、拓展、完善，增强影响力和感召力。</p>
+
+      <h4>三、目标与开放态度</h4>
+      <p>目标：使中华民族最基本的文化基因同当代中国相适应、同现代社会相协调、同现实文化相融通。开放态度：不故步自封，以博大胸怀广泛开展同各国文化交流，取长补短、择善而从，在汲取各种文明养分中丰富和发展中华文化。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>总方针</td><td>有鉴别地对待、有扬弃地继承</td></tr>
+          <tr><td>创造性转化</td><td>改造形式、激活生命力</td></tr>
+          <tr><td>创新性发展</td><td>补充拓展、增强影响力</td></tr>
+          <tr><td>目标</td><td>三个"同"：相适应、相协调、相融通</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 8.1 -->
+    <article class="card" id="s8-1" data-section="8.1" data-chapter="8"
+             data-title="如何理解让人民生活幸福是"国之大者"？">
+      <span class="section-num">§ 8.1</span>
+      <h2>如何理解让人民生活幸福是"国之大者"？</h2>
+      <blockquote>让人民生活幸福是发展的出发点和落脚点，增进民生福祉是根本目的。民生是人民幸福之基，事关民心所向、民情所系、民意所指，决定党的事业成败和国家命运兴衰。</blockquote>
+
+      <h4>一、三个"是"</h4>
+      <ul>
+        <li><strong>是坚持立党为公、执政为民的本质要求</strong>：实现好、维护好、发展好最广大人民根本利益。</li>
+        <li><strong>是社会主义生产的根本目的</strong>：人民当家作主决定生产以增进民生福祉为目的，促进人的全面发展。</li>
+        <li><strong>是全面建设社会主义现代化国家的应有之义</strong>：中国式现代化是造福人民的现代化，须把增进民生福祉放在更突出位置。</li>
+      </ul>
+
+      <h4>二、实践要求</h4>
+      <p>注重普惠性、基础性、兜底性民生建设，解决急难愁盼问题。根据经济发展和财力状况逐步提高人民生活水平，让群众得到看得见、摸得着的实惠。不断增强人民获得感、幸福感、安全感。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>定位</td><td>国之大者、出发点和落脚点</td></tr>
+          <tr><td>三个"是"</td><td>本质要求、根本目的、应有之义</td></tr>
+          <tr><td>实践要求</td><td>普惠性/基础性/兜底性、急难愁盼、三感</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 8.2 -->
+    <article class="card" id="s8-2" data-section="8.2" data-chapter="8"
+             data-title="为什么在推进社会治理现代化过程中要坚持共建共治共享？">
+      <span class="section-num">§ 8.2</span>
+      <h2>为什么在推进社会治理现代化过程中要坚持共建共治共享？</h2>
+      <blockquote>共建是<strong>基础</strong>，共治是<strong>关键</strong>，共享是<strong>目标</strong>，三者构成社会治理的基本理念。</blockquote>
+
+      <h4>一、内涵分工</h4>
+      <p><strong>共建</strong>（基础）：共同参与社会建设，突出制度体系的基础性、战略性地位。<strong>共治</strong>（关键）：共同参与社会治理，树立大社会观、大治理观，打造全民参与的开放治理体系。<strong>共享</strong>（目标）：共同享有治理成果，更多更公平惠及全体人民。</p>
+
+      <h4>二、制度保障意义</h4>
+      <p>是推进社会治理现代化的重要制度保障，维护国家安全、社会安定、人民安宁。社会治理现代化既是国家治理现代化的重要支柱，又是其坚实基础。</p>
+
+      <h4>三、适应社会主要矛盾转化的必然要求</h4>
+      <p>人民对民主、法治、公平、正义、安全、环境要求日益增长，更加注重知情权、参与权、表达权、监督权。体现人民群众主人翁地位，满足多层次、差异化需求。</p>
+
+      <h4>四、防范化解重大风险挑战的迫切需要</h4>
+      <p>国际国内环境深刻复杂变化，各类风险挑战前所未有。提高风险防范化解的前瞻性、系统性、协同性。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>共建</td><td>基础，制度体系</td></tr>
+          <tr><td>共治</td><td>关键，大社会观大治理观</td></tr>
+          <tr><td>共享</td><td>目标，惠及全体人民</td></tr>
+          <tr><td>意义</td><td>化解风险、适应矛盾转化</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 8.3 -->
+    <article class="card" id="s8-3" data-section="8.3" data-chapter="8"
+             data-title="如何建设人与自然和谐共生的现代化？">
+      <span class="section-num">§ 8.3</span>
+      <h2>如何建设人与自然和谐共生的现代化？</h2>
+      <blockquote>以生态文明建设为引领，统筹发展与保护，推进绿色转型。将生态文明建设融入经济、政治、文化、社会建设各方面全过程。</blockquote>
+
+      <h4>一、三场攻坚战</h4>
+      <p><strong>蓝天保卫战</strong>：大气污染综合治理，消除重污染天气。<strong>碧水保卫战</strong>：系统推进水资源、水环境、水生态治理。<strong>净土保卫战</strong>：加强土壤污染源头防控，保障土壤环境安全。</p>
+
+      <h4>二、重点任务</h4>
+      <p>加快推动绿色低碳发展——发展方式绿色转型，构建绿色产业体系。持续深入打好污染防治攻坚战——坚持精准治污、科学治污、依法治污。提升生态系统多样性、稳定性、持续性——推进重大生态保护和修复工程，保护生物多样性。积极稳妥推进碳达峰碳中和——立足能源资源禀赋，协同推进降碳、减污、扩绿、增长。</p>
+
+      <h4>三、保障体系与全球责任</h4>
+      <p>健全生态文明制度体系，用最严格制度最严密法治保护生态环境。积极参与全球环境治理，推动构建地球生命共同体。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>三场攻坚战</td><td>蓝天、碧水、净土</td></tr>
+          <tr><td>重点任务</td><td>绿色转型、污染防治、生态修复、碳达峰碳中和</td></tr>
+          <tr><td>保障</td><td>最严格制度最严密法治</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 9.1 -->
+    <article class="card" id="s9-1" data-section="9.1" data-chapter="9"
+             data-title="如何理解"生态兴则文明兴"？">
+      <span class="section-num">§ 9.1</span>
+      <h2>如何理解"生态兴则文明兴"？</h2>
+      <blockquote>生态环境直接关系文明兴衰，生态文明是历史趋势。人与自然是生命共同体。</blockquote>
+
+      <h4>一、人与自然是生命共同体</h4>
+      <p>自然为生命之母，人依赖于自然。保护自然即保护人类，建设生态文明即造福人类。</p>
+
+      <h4>二、生态决定文明兴衰</h4>
+      <p>四大文明古国均发源于生态良好地区。生态环境衰退则导致文明衰落（如古埃及、古巴比伦）。</p>
+
+      <h4>三、生态文明是历史趋势</h4>
+      <p>要求协调人与自然关系，将人类活动限制在生态可承受限度内。顺应人与自然和谐发展的新要求，昭示人类文明未来方向。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>人与自然的定位</td><td>生命共同体</td></tr>
+          <tr><td>历史证明</td><td>生态良好→文明兴起，生态衰退→文明衰落</td></tr>
+          <tr><td>趋势</td><td>生态文明昭示未来方向</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 9.2 -->
+    <article class="card" id="s9-2" data-section="9.2" data-chapter="9"
+             data-title="如何理解"绿水青山就是金山银山"？">
+      <span class="section-num">§ 9.2</span>
+      <h2>如何理解"绿水青山就是金山银山"？</h2>
+      <blockquote>阐明发展与保护<strong>辩证统一</strong>关系。保护生态环境就是保护生产力，改善生态环境就是发展生产力。</blockquote>
+
+      <h4>一、核心理念</h4>
+      <p>指明实现发展和保护协同共生的新路径。二者根本上辩证统一、相辅相成，不是矛盾对立。发展绝不能以破坏生态为代价，绝不能一味索取资源。</p>
+
+      <h4>二、财富属性</h4>
+      <p>既是自然财富、生态财富，又是社会财富、经济财富。可转化为生态经济优势（生态农业、工业、旅游等）。绿水青山买不到，是人民群众的共有财富和健康保障。</p>
+
+      <h4>三、关键在思路</h4>
+      <p>关键在人，关键在思路。处理好高质量发展与高水平保护的关系，构建绿色低碳循环经济体系，增强发展潜力和后劲。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>核心关系</td><td>保护生态=保护生产力，改善生态=发展生产力</td></tr>
+          <tr><td>财富属性</td><td>自然财富+生态财富+社会财富+经济财富</td></tr>
+          <tr><td>实现路径</td><td>关键在人/思路，绿色低碳循环经济体系</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 9.3 -->
+    <article class="card" id="s9-3" data-section="9.3" data-chapter="9"
+             data-title="中国为全球环境治理做出了哪些重要贡献？">
+      <span class="section-num">§ 9.3</span>
+      <h2>中国为全球环境治理做出了哪些重要贡献？</h2>
+      <blockquote>三大贡献领域：<strong>气候治理、生物多样性治理、绿色"一带一路"</strong>。</blockquote>
+
+      <h4>一、积极参与全球气候治理</h4>
+      <p>提前完成2020年气候目标，人工林面积全球第一，臭氧层保护贡献最大。力争2030年前碳达峰、2060年前碳中和。</p>
+
+      <h4>二、积极推进全球生物多样性治理</h4>
+      <p>承办联合国《生物多样性公约》第十五次缔约方大会，推动达成"<strong>昆明—蒙特利尔全球生物多样性框架</strong>"等里程碑成果。实施生物多样性保护修复重大工程，支持发展中国家相关事业。</p>
+
+      <h4>三、积极打造绿色"一带一路"</h4>
+      <p>建设更紧密绿色发展伙伴关系，完善绿色发展国际联盟。融入联合国2030年可持续发展议程，实施应对气候变化南南合作计划。统筹推进经济增长、社会发展、环境保护，实现共同发展。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>气候治理</td><td>碳达峰碳中和、人工林第一</td></tr>
+          <tr><td>生物多样性</td><td>昆明-蒙特利尔框架</td></tr>
+          <tr><td>绿色一带一路</td><td>南南合作、2030议程</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 10.1 -->
+    <article class="card" id="s10-1" data-section="10.1" data-chapter="10"
+             data-title="为什么说当今世界百年未有之大变局加速演进？">
+      <span class="section-num">§ 10.1</span>
+      <h2>为什么说当今世界百年未有之大变局加速演进？</h2>
+      <blockquote>"<strong>东升西降</strong>""<strong>中治西乱</strong>"鲜明，世界进入新的动荡变革期。四大力量推动变局加速。</blockquote>
+
+      <h4>一、国际力量对比深刻变化</h4>
+      <p>新兴市场国家和发展中国家群体性崛起，改变全球政治经济版图。发达国家内部矛盾重重、实力相对下降，"东升西降""中治西乱"更加鲜明。</p>
+
+      <h4>二、新一轮科技革命和产业变革深入发展</h4>
+      <p>人工智能、大数据、量子技术、基因工程等前沿科技突破，催生新产业新业态新模式。社会生产从工业化向自动化、智能化转变。科学技术前所未有地影响各国前途命运、人类生产生活方式和思维方式。</p>
+
+      <h4>三、国际体系和国际秩序深度调整</h4>
+      <p>二战后建立的国际秩序和全球治理体系不适应的地方越来越多。西方主导的国际政治经济秩序难以为继，发展中国家代表性和发言权扩大。国际关系民主化不可阻挡。</p>
+
+      <h4>四、世界进入新的动荡变革期</h4>
+      <p>世纪疫情影响深远，局部冲突硝烟又起，冷战思维和集团政治回潮。单边主义、保护主义抬头，经济全球化遭遇逆流。和平、发展、安全、治理"<strong>四大赤字</strong>"有增无减，非传统安全威胁持续蔓延。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>力量对比</td><td>东升西降、中治西乱</td></tr>
+          <tr><td>科技革命</td><td>AI、大数据、量子、基因工程</td></tr>
+          <tr><td>秩序调整</td><td>国际关系民主化</td></tr>
+          <tr><td>动荡变革</td><td>四大赤字、冷战思维回潮</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- 10.2 -->
+    <article class="card" id="s10-2" data-section="10.2" data-chapter="10"
+             data-title="如何理解构建人类命运共同体是世界各国人民前途所在？">
+      <span class="section-num">§ 10.2</span>
+      <h2>如何理解构建人类命运共同体是世界各国人民前途所在？</h2>
+      <blockquote>各国相互联系、彼此依存日益加深，正形成利益交融、安危与共的命运共同体。没有哪个国家能独自应对挑战，也没有哪个国家能退回自我封闭的孤岛。目标是建设"<strong>五个世界</strong>"。</blockquote>
+
+      <h4>一、建设"五个世界"</h4>
+      <ul>
+        <li><strong>持久和平</strong>：坚持对话协商，大国小国一律平等，构建相互尊重、公平正义、合作共赢的新型国际关系。</li>
+        <li><strong>普遍安全</strong>：树立共同、综合、合作、可持续的安全观，统筹应对传统和非传统安全威胁，营造共建共享安全格局。</li>
+        <li><strong>共同繁荣</strong>：推进开放包容普惠平衡共赢的经济全球化，让发展成果惠及世界各国。</li>
+        <li><strong>开放包容</strong>：坚持交流互鉴，和而不同、兼收并蓄，文明间对话不对立、交流不取代、包容不冲突。</li>
+        <li><strong>清洁美丽</strong>：倡导绿色低碳循环可持续的生产生活方式，构筑尊崇自然、绿色发展的生态体系，共建地球生命共同体。</li>
+      </ul>
+
+      <h4>二、重大意义</h4>
+      <p>顺应历史潮流，回应时代要求，凝聚各国共识。为人类社会实现共同发展、持续繁荣、长治久安绘制蓝图，对和平发展和繁荣进步具有重大深远意义。</p>
+
+      <table>
+        <thead><tr><th>维度</th><th>关键词</th></tr></thead>
+        <tbody>
+          <tr><td>时代背景</td><td>利益交融、安危与共，不能退回孤岛</td></tr>
+          <tr><td>五个世界</td><td>持久和平、普遍安全、共同繁荣、开放包容、清洁美丽</td></tr>
+          <tr><td>意义</td><td>绘制蓝图、凝聚共识</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+  </div><!-- /#content -->
+
+  <!-- Card Navigation -->
+  <div id="card-nav">
+    <button id="btn-prev" title="上一考点 (← / K)">← 上一考点</button>
+    <button id="btn-next" title="下一考点 (→ / J)">下一考点 →</button>
+  </div>
+</div><!-- /#main -->
+
+<script>
+/* ============================================================
+   App — Scholarly Study Tool
+   ============================================================ */
+(function() {
+  // ── State ──────────────────────────────────────────────
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const totalCards = cards.length;
+  let currentIndex = 0;
+  let isScrollMode = false;
+  let activeFilters = new Set(); // chapters to show when filtered
+  let searchTerm = '';
+
+  // ── DOM refs ──────────────────────────────────────────
+  const $sidebar = document.getElementById('sidebar');
+  const $overlay = document.getElementById('sidebar-overlay');
+  const $menuToggle = document.getElementById('menu-toggle');
+  const $toc = document.getElementById('toc');
+  const $content = document.getElementById('content');
+  const $search = document.getElementById('search');
+  const $searchClear = document.getElementById('search-clear');
+  const $searchCount = document.getElementById('search-count');
+  const $cardIndicator = document.getElementById('card-indicator');
+  const $progressBar = document.getElementById('progress-bar');
+  const $btnPrev = document.getElementById('btn-prev');
+  const $btnNext = document.getElementById('btn-next');
+  const $themeToggle = document.getElementById('theme-toggle');
+  const $viewToggle = document.getElementById('view-toggle');
+  const $noResults = document.getElementById('no-results');
+  const $cardNav = document.getElementById('card-nav');
+
+  // ── Chapter metadata ──────────────────────────────────
+  const chapters = [
+    { id: '1', title: '1  习近平新时代中国特色社会主义思想' },
+    { id: '2', title: '2  中国特色社会主义与历史方位' },
+    { id: '3', title: '3  中国式现代化与教育科技人才' },
+    { id: '4', title: '4  党的领导与全面从严治党' },
+    { id: '5', title: '5  新发展理念与新发展格局' },
+    { id: '6', title: '6  政治制度与全过程人民民主' },
+    { id: '7', title: '7  意识形态与文化自信' },
+    { id: '8', title: '8  民生与社会治理现代化' },
+    { id: '9', title: '9  生态文明' },
+    { id: '10', title: '10  百年未有之大变局与人类命运共同体' }
+  ];
+
+  // ── Theme ─────────────────────────────────────────────
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    $themeToggle.innerHTML = theme === 'dark' ? '☀️ 浅色' : '🌙 深色';
+    localStorage.setItem('theme', theme);
+  }
+
+  applyTheme(getPreferredTheme());
+
+  $themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  // ── Build Sidebar TOC ─────────────────────────────────
+  function buildTOC() {
+    $toc.innerHTML = '';
+    chapters.forEach(ch => {
+      const div = document.createElement('div');
+      div.className = 'toc-chapter';
+      div.dataset.chapter = ch.id;
+
+      const btn = document.createElement('button');
+      btn.className = 'toc-chapter-btn';
+      btn.innerHTML = `<span class="arrow">▼</span> ${ch.title}`;
+      btn.addEventListener('click', () => {
+        div.classList.toggle('collapsed');
+      });
+
+      const items = document.createElement('div');
+      items.className = 'toc-items';
+
+      const chapterCards = cards.filter(c => c.dataset.chapter === ch.id);
+      chapterCards.forEach(card => {
+        const item = document.createElement('button');
+        item.className = 'toc-item';
+        item.textContent = card.dataset.section + ' ' + card.querySelector('h2').textContent;
+        item.dataset.section = card.dataset.section;
+        item.addEventListener('click', () => {
+          const idx = cards.indexOf(card);
+          if (idx !== -1) navigateTo(idx);
+          closeSidebar();
+        });
+        items.appendChild(item);
+      });
+
+      div.appendChild(btn);
+      div.appendChild(items);
+      $toc.appendChild(div);
+    });
+  }
+
+  buildTOC();
+
+  // ── Navigation ────────────────────────────────────────
+  function navigateTo(index) {
+    if (index < 0 || index >= totalCards) return;
+    currentIndex = index;
+    renderCard();
+    updateProgress();
+    updateNavButtons();
+    updateTOCActive();
+    // Scroll card into view in scroll mode
+    if (isScrollMode) {
+      cards[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      $content.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Update URL hash
+    history.replaceState(null, '', '#' + cards[currentIndex].dataset.section);
+  }
+
+  function renderCard() {
+    // Hide all cards, show current (or all in scroll mode)
+    if (isScrollMode) {
+      cards.forEach(c => c.classList.add('active'));
+      $cardNav.style.display = 'none';
+      return;
+    }
+
+    $cardNav.style.display = 'flex';
+    const visibleCards = getVisibleCards();
+
+    cards.forEach(c => c.classList.remove('active'));
+
+    if (visibleCards.length === 0) {
+      $noResults.classList.add('visible');
+      return;
+    }
+
+    $noResults.classList.remove('visible');
+
+    // Find currentIndex within visible cards
+    const visibleIdx = visibleCards.indexOf(cards[currentIndex]);
+    if (visibleIdx === -1) {
+      // Current card is filtered out, jump to first visible
+      const firstVisible = visibleCards[0];
+      currentIndex = cards.indexOf(firstVisible);
+    }
+
+    cards[currentIndex].classList.add('active');
+    $cardIndicator.textContent = `${currentIndex + 1} / ${totalCards}`;
+    updateNavButtons();
+  }
+
+  function getVisibleCards() {
+    if (!searchTerm) return cards;
+    return cards.filter(c => {
+      const text = (c.dataset.title + ' ' + c.textContent).toLowerCase();
+      return text.includes(searchTerm.toLowerCase());
+    });
+  }
+
+  function updateProgress() {
+    const pct = ((currentIndex + 1) / totalCards) * 100;
+    $progressBar.style.setProperty('--progress', pct + '%');
+  }
+
+  function updateNavButtons() {
+    const visibleCards = getVisibleCards();
+    if (visibleCards.length <= 1) {
+      $btnPrev.disabled = true;
+      $btnNext.disabled = true;
+      return;
+    }
+    const visibleIdx = visibleCards.indexOf(cards[currentIndex]);
+    $btnPrev.disabled = visibleIdx <= 0;
+    $btnNext.disabled = visibleIdx >= visibleCards.length - 1;
+  }
+
+  function updateTOCActive() {
+    document.querySelectorAll('.toc-item').forEach(el => el.classList.remove('active'));
+    const activeItem = document.querySelector(`.toc-item[data-section="${cards[currentIndex].dataset.section}"]`);
+    if (activeItem) {
+      activeItem.classList.add('active');
+      // Ensure parent chapter is expanded
+      const chapter = activeItem.closest('.toc-chapter');
+      if (chapter) chapter.classList.remove('collapsed');
+      // Scroll into view
+      activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  $btnPrev.addEventListener('click', () => {
+    const visibleCards = getVisibleCards();
+    const visibleIdx = visibleCards.indexOf(cards[currentIndex]);
+    if (visibleIdx > 0) {
+      navigateTo(cards.indexOf(visibleCards[visibleIdx - 1]));
+    }
+  });
+
+  $btnNext.addEventListener('click', () => {
+    const visibleCards = getVisibleCards();
+    const visibleIdx = visibleCards.indexOf(cards[currentIndex]);
+    if (visibleIdx < visibleCards.length - 1) {
+      navigateTo(cards.indexOf(visibleCards[visibleIdx + 1]));
+    }
+  });
+
+  // ── Search ────────────────────────────────────────────
+  function doSearch(term) {
+    searchTerm = term.trim();
+    const hasSearch = searchTerm.length > 0;
+
+    $searchClear.classList.toggle('visible', hasSearch);
+
+    // Update TOC items — show/hide based on search
+    document.querySelectorAll('.toc-item').forEach(item => {
+      const section = item.dataset.section;
+      const card = cards.find(c => c.dataset.section === section);
+      if (!card) return;
+
+      if (!hasSearch) {
+        item.classList.remove('search-hidden', 'search-match');
+        return;
+      }
+
+      const text = (card.dataset.title + ' ' + card.textContent).toLowerCase();
+      const matches = text.includes(searchTerm.toLowerCase());
+      item.classList.toggle('search-hidden', !matches);
+      item.classList.toggle('search-match', matches);
+    });
+
+    // Show/hide chapter headers based on whether any items visible
+    document.querySelectorAll('.toc-chapter').forEach(ch => {
+      const hasVisible = ch.querySelectorAll('.toc-item:not(.search-hidden)').length > 0;
+      ch.style.display = hasVisible || !hasSearch ? '' : 'none';
+      if (hasSearch && hasVisible) ch.classList.remove('collapsed');
+    });
+
+    // Update search count
+    const visibleCards = getVisibleCards();
+    if (hasSearch) {
+      $searchCount.textContent = `找到 ${visibleCards.length} 个考点`;
+    } else {
+      $searchCount.textContent = '';
+    }
+
+    // Highlight in current card
+    clearHighlights();
+    if (hasSearch && visibleCards.length > 0 && isScrollMode) {
+      highlightInContent(searchTerm);
+    }
+
+    // Navigate to first match if current is filtered out
+    if (hasSearch && visibleCards.length > 0) {
+      const currentVisible = visibleCards.includes(cards[currentIndex]);
+      if (!currentVisible || !isScrollMode) {
+        navigateTo(cards.indexOf(visibleCards[0]));
+      }
+    }
+
+    renderCard();
+    updateNavButtons();
+  }
+
+  function clearHighlights() {
+    document.querySelectorAll('mark').forEach(m => {
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function highlightInContent(term) {
+    if (!term) return;
+    const walker = (node) => {
+      if (node.nodeType === 3) { // Text node
+        const text = node.textContent;
+        const idx = text.toLowerCase().indexOf(term.toLowerCase());
+        if (idx !== -1) {
+          const span = document.createElement('span');
+          const before = text.slice(0, idx);
+          const match = text.slice(idx, idx + term.length);
+          const after = text.slice(idx + term.length);
+          span.appendChild(document.createTextNode(before));
+          const mark = document.createElement('mark');
+          mark.textContent = match;
+          span.appendChild(mark);
+          span.appendChild(document.createTextNode(after));
+          node.parentNode.replaceChild(span, node);
+        }
+      } else if (node.nodeType === 1 && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE' && node.tagName !== 'MARK') {
+        Array.from(node.childNodes).forEach(walker);
+      }
+    };
+    // Only highlight in the active card
+    const activeCard = document.querySelector('.card.active');
+    if (activeCard) walker(activeCard);
+    // In scroll mode, highlight all visible cards
+    if (isScrollMode) {
+      document.querySelectorAll('.card').forEach(c => walker(c));
+    }
+  }
+
+  $search.addEventListener('input', () => {
+    doSearch($search.value);
+    if (searchTerm && !isScrollMode) {
+      // Highlight in current active card
+      clearHighlights();
+      highlightInContent(searchTerm);
+    }
+  });
+
+  $searchClear.addEventListener('click', () => {
+    $search.value = '';
+    doSearch('');
+    clearHighlights();
+    if (!isScrollMode) {
+      navigateTo(currentIndex);
+    }
+    $search.focus();
+  });
+
+  // ── View Toggle ───────────────────────────────────────
+  function setViewMode(scroll) {
+    isScrollMode = scroll;
+    if (scroll) {
+      $content.classList.add('scroll-mode');
+      $viewToggle.classList.add('active');
+      $viewToggle.innerHTML = '📜 滚动';
+      $cardNav.style.display = 'none';
+      $cardIndicator.textContent = '';
+      cards.forEach(c => c.classList.add('active'));
+      if (searchTerm) {
+        clearHighlights();
+        highlightInContent(searchTerm);
+      }
+    } else {
+      $content.classList.remove('scroll-mode');
+      $viewToggle.classList.remove('active');
+      $viewToggle.innerHTML = '📇 卡片';
+      clearHighlights();
+      renderCard();
+      updateProgress();
+    }
+  }
+
+  $viewToggle.addEventListener('click', () => {
+    setViewMode(!isScrollMode);
+  });
+
+  // ── Keyboard ──────────────────────────────────────────
+  document.addEventListener('keydown', (e) => {
+    // Don't handle if typing in search
+    if (document.activeElement === $search) {
+      if (e.key === 'Escape') {
+        $search.blur();
+        $search.value = '';
+        doSearch('');
+        clearHighlights();
+      }
+      return;
+    }
+
+    // Don't handle if in input/textarea
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'j':
+        e.preventDefault();
+        $btnNext.click();
+        break;
+      case 'ArrowLeft':
+      case 'k':
+        e.preventDefault();
+        $btnPrev.click();
+        break;
+      case '/':
+        e.preventDefault();
+        $search.focus();
+        $search.select();
+        break;
+      case 'Escape':
+        e.preventDefault();
+        $search.value = '';
+        doSearch('');
+        clearHighlights();
+        break;
+      case 't':
+        if (!e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          toggleSidebar();
+        }
+        break;
+      case 'v':
+        if (!e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          setViewMode(!isScrollMode);
+        }
+        break;
+    }
+  });
+
+  // ── Sidebar (mobile) ──────────────────────────────────
+  function openSidebar() {
+    $sidebar.classList.add('open');
+    $overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    $sidebar.classList.remove('open');
+    $overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+
+  function toggleSidebar() {
+    if ($sidebar.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  $menuToggle.addEventListener('click', toggleSidebar);
+  $overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  // ── Touch / Swipe ─────────────────────────────────────
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  });
+
+  document.addEventListener('touchend', (e) => {
+    if (isScrollMode) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) $btnNext.click();
+      else $btnPrev.click();
+    }
+  });
+
+  // ── URL Hash routing ─────────────────────────────────
+  function handleHash() {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const card = cards.find(c => c.dataset.section === hash);
+      if (card) {
+        navigateTo(cards.indexOf(card));
+      }
+    }
+  }
+
+  window.addEventListener('hashchange', handleHash);
+
+  // ── Init ──────────────────────────────────────────────
+  function init() {
+    handleHash();
+    if (!window.location.hash) {
+      navigateTo(0);
+    }
+    updateProgress();
+  }
+
+  init();
+
+  console.log('📚 政治理论核心考点精编 — 交互式学习工具已就绪');
+  console.log('   ← → 或 J/K  切换考点');
+  console.log('   /            聚焦搜索');
+  console.log('   T            切换目录');
+  console.log('   V            切换卡片/滚动视图');
+  console.log('   Esc          清除搜索');
+})();
+</script>
+
+</body>
+</html>
